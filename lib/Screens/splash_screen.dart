@@ -1,7 +1,9 @@
+import 'package:ai_assistant/Screens/welcome_screen.dart';
 import 'package:ai_assistant/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_assistant/helper/global.dart';
-
+import 'package:ai_assistant/helper/pref.dart';
+import 'package:get/get.dart';
 import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,13 +15,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  // void initState() {
-  //   super.initState();
-  //   Future.delayed(Duration(seconds: 2), () {
-  //     Navigator.of(context)
-  //         .pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
-  //   });
-  // }
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2), () {
+      Get.off(() => Pref.showWelcome ? const WelcomeScreen() : HomeScreen());
+    });
+    //   Navigator.of(context).pushReplacement(MaterialPageRoute(
+    //       builder: (_) => Pref.showWelcome ? WelcomeScreen1() : HomeScreen()));
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.maxFinite,
         child: Column(
           children: [
-            Spacer(
-              flex: 2,
-            ),
+            const Spacer(flex: 2),
             Card(
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
@@ -46,9 +48,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            Spacer(),
-            LoadingWidget(),
-            Spacer(),
+            const Spacer(),
+            const LoadingWidget(),
+            const Spacer(),
           ],
         ),
       ),
